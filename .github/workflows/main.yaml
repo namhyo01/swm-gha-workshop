@@ -2,26 +2,34 @@
 # job 하나에 OS는 하나만 붙는다
 name: 'SWM GitHub Actions Basic'
 
-on: push
-
+on: ['push', 'pull_request']
+# on:
+#   push:
+#     branches:
+#       - 'main'
+#     paths:
+#       - 'src/**'
+#       - 'test/**'
 jobs:
   first-job:
-    name: 'First Job'
-
-    strategy:
-      matrix:
-        os: [ 'windows-latest', 'macos-latest', 'ubuntu-latest' ]
-        nodejs: ['16.x','18.x'] # nodejs버젼 이 두개를 다 돌리고 싶으면?
-    runs-on: ${{ matrix.os }}
+    name: 'Second Job'
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Say Hello World on ${{ matrix.os }}
+    - name: Hello
       shell: bash
       run: |
-        echo "Hello World on ${{ matrix.os }} with ${{matrix.nodejs}}"
+        echo "hello world"       
+  second-job:
+    name: 'Second Job'
+    needs:
+    - 'first-job'
+    # - 'second-job'
+    runs-on: ubuntu-latest
 
-    - name: Say Hello World on ${{ matrix.os }}
-      if: matrix.os == 'ubuntu-latest'
+    steps:
+    - name: Hello
       shell: bash
       run: |
-        echo "Hello World on ${{ matrix.os }} with ${{matrix.nodejs}}"       
+        echo "hello world"
+          
