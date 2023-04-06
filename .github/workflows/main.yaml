@@ -13,16 +13,20 @@ jobs:
 
     steps:
     - name: Say Hello World 1
+      id: first # output찾기위한
       shell: bash
       env:
         STEP_LEVEL_1: "STEP level"
       run: |
-        echo "Hello World from step 1"
-        echo "GLOBAL : Hello world from ${{env.GLOBAL_LEVEL}}"
-        echo "JOB 1 : Hello world from ${{env.JOB_LEVEL_1}}"
-        echo "JOB 2 : Hello world from ${{env.JOB_LEVEL_2}}"
-        echo "STEP 1 : Hello world from ${{env.STEP_LEVEL_1}}"
-        echo "STEP 2 : Hello world from ${{env.STEP_LEVEL_2}}"
+        swm_vlaue1="this is fuirst out"
+        swm_vlaue2="this is second out"
+        echo "::set-output name=swm1::$swm_value1" # 이게 output내는거
+        echo "::set-output name=swm2::$swm_value2" # 이게 output내는거
+    - name: Get output swm_value
+      shell: pwsh
+      run: |
+        echo "Out value 1 : ${{steps.first.outputs.swm1}}" # outputs이니 여러개 사용가능
+        echo "Out value 2 : ${{steps.first.outputs.swm2}}" # outputs이니 여러개 사용가능
 
     - name: Say Hello World 2
       shell: pwsh
@@ -39,7 +43,7 @@ jobs:
       shell: bash
       run: |
         swmvalue=$(echo "hello SWM") # 쉘명령어로 무언가를 실행 그 결과물을 swmvalue에 저장
-        echo "swm_value=$swmvalue" >> $GITHUB_ENV # 환경변수에 저장(job level에서 쓰게) 그것을 github_env에 append한다
+        echo "swm_value=$swmvalue" >> $GITHUB_ENV # 환경변수에 저장(job level에서 쓰게 => step에서 사용되니 globla에서 쓰고 싶으면 global에서 변수를 선언하자(미리)) 그것을 github_env에 append한다
     - name: Get environment variable from bash
       shell: bash
       run: |
