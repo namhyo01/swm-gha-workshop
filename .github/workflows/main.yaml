@@ -11,7 +11,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-  JOB_LEVEL1: "JOB level1"
+  JOB_LEVEL_1: "JOB level1"
 
     steps:
     - name: Say Hello World 1
@@ -42,7 +42,7 @@ jobs:
 
     runs-on: ubuntu-latest
   env:
-    JOB_LEVEL2: "JOB level2"
+    JOB_LEVEL_2: "JOB level2"
     steps:
     - name: Say Hello World 1
       shell: bash
