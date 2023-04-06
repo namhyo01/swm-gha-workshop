@@ -18,10 +18,12 @@ jobs:
       env:
         STEP_LEVEL_1: "STEP level"
       run: |
-        swm_vlaue1="this is fuirst out"
-        swm_vlaue2="this is second out"
-        echo "::set-output name=swm1::$swm_value1" # 이게 output내는거
-        echo "::set-output name=swm2::$swm_value2" # 이게 output내는거
+        swm_value1="this is fuirst out"
+        swm_value2="this is second out"
+        # echo "::set-output name=swm1::$swm_value1" # 이게 output내는거
+        echo "swm1=$swm_value1" >> $GITHUB_OUTPUT
+        echo "swm2=$swm_value2" >> $GITHUB_OUTPUT
+        # echo "::set-output name=swm2::$swm_value2" # 이게 output내는거
     - name: Get output swm_value
       shell: pwsh
       run: |
