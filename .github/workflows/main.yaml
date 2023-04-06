@@ -11,11 +11,11 @@ jobs:
     strategy:
       matrix:
         os: [ 'windows-latest', 'macos-latest', 'ubuntu-latest' ]
-
+        nodejs: ['16.x','18.x'] # nodejs버젼 이 두개를 다 돌리고 싶으면?
     runs-on: ${{ matrix.os }}
 
     steps:
     - name: Say Hello World on ${{ matrix.os }}
       shell: bash
       run: |
-        echo "Hello World on ${{ matrix.os }}"
+        echo "Hello World on ${{ matrix.os }} 쟈소 ${{matrix.nodejs}}"
