@@ -12,7 +12,7 @@ on: ['push', 'pull_request']
 #       - 'test/**'
 jobs:
   first-job:
-    name: 'Second Job'
+    name: 'First Job'
     runs-on: ubuntu-latest
 
     steps:
