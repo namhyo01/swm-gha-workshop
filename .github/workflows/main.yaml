@@ -35,33 +35,21 @@ jobs:
         echo "JOB 2 : Hello world from ${{env.JOB_LEVEL_2}}"
         echo "STEP 1 : Hello world from ${{env.STEP_LEVEL_1}}"
         echo "STEP 2 : Hello world from ${{env.STEP_LEVEL_2}}"
-  second-job:
-    name: 'Second Job'
-
-    runs-on: ubuntu-latest
-    env:
-      JOB_LEVEL_2: "JOB level2"
-    steps:
-    - name: Say Hello World 1
+    - name: SET environment variable
       shell: bash
-      env:
-        STEP_LEVEL_1: "STEP level"
       run: |
-        echo "Hello World from step 1"
-        echo "GLOBAL : Hello world from ${{env.GLOBAL_LEVEL}}"
-        echo "JOB 1 : Hello world from ${{env.JOB_LEVEL_1}}"
-        echo "JOB 2 : Hello world from ${{env.JOB_LEVEL_2}}"
-        echo "STEP 1 : Hello world from ${{env.STEP_LEVEL_1}}"
-        echo "STEP 2 : Hello world from ${{env.STEP_LEVEL_2}}"
+        swmvalue=$(echo "hello SWM") # 쉘명령어로 무언가를 실행 그 결과물을 swmvalue에 저장
+        echo "swm_value=$swmvalue" >> $GITHUB_ENV # 환경변수에 저장(job level에서 쓰게) 그것을 github_env에 append한다
+    - name: Get environment variable from bash
+      shell: bash
+      run: |
+        echo "swm_value1: ${{env.swm_value}}" # github action문법
+        echo "swm_value2: $swm_value"    # bash셀 특화
+        echo "swm_value3: $env:swm_value"   # pwsh셀 특화
 
-    - name: Say Hello World 2
+    - name: Get environment variable from pwsh
       shell: pwsh
-      env:
-        STEP_LEVEL_2: "STEP leve2"
       run: |
-        echo "Hello World from step 2"
-        echo "GLOBAL : Hello world from ${{env.GLOBAL_LEVEL}}"
-        echo "JOB 1 : Hello world from ${{env.JOB_LEVEL_1}}"
-        echo "JOB 2 : Hello world from ${{env.JOB_LEVEL_2}}"
-        echo "STEP 1 : Hello world from ${{env.STEP_LEVEL_1}}"
-        echo "STEP 2 : Hello world from ${{env.STEP_LEVEL_2}}"
+        echo "swm_value1: ${{env.swm_value}}"
+        echo "swm_value2: $swm_value"    
+        echo "swm_value3: $env:swm_value"    
