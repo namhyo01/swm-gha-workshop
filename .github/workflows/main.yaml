@@ -18,4 +18,10 @@ jobs:
     - name: Say Hello World on ${{ matrix.os }}
       shell: bash
       run: |
-        echo "Hello World on ${{ matrix.os }} 쟈소 ${{matrix.nodejs}}"
+        echo "Hello World on ${{ matrix.os }} with ${{matrix.nodejs}}"
+        
+    - name: Say Hello World on ${{ matrix.os }}
+      if: matrix.os == 'ubuntu_latest'
+      shell: bash
+      run: |
+        echo "Hello World on ${{ matrix.os }} with ${{matrix.nodejs}}"       
