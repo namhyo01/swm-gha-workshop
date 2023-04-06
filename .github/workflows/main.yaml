@@ -31,6 +31,11 @@ jobs:
         echo "Out value 1 : ${{steps.first.outputs.swm1}}" # outputs이니 여러개 사용가능
         echo "Out value 2 : ${{steps.first.outputs.swm2}}" # outputs이니 여러개 사용가능
 
+    - name: Get secret value
+      shell: bash
+      run: |
+        echo "MY_SECRET value is ${{secrets.MY_SECRET}}"
+
     - name: Say Hello World 2
       shell: pwsh
       env:
