@@ -21,6 +21,7 @@ jobs:
         swm_value1="this is fuirst out"
         swm_value2="this is second out"
         # echo "::set-output name=swm1::$swm_value1" # 이게 output내는거
+        echo "::add-mask::$swm1"
         echo "swm1=$swm_value1" >> $GITHUB_OUTPUT
         echo "swm2=$swm_value2" >> $GITHUB_OUTPUT
         # echo "::set-output name=swm2::$swm_value2" # 이게 output내는거
