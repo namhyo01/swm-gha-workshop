@@ -121,7 +121,8 @@ bodyMarkdown="Message sent directly from **local machine**"
 ## `action.yml` 작성 ##
 
 * [GitHub Actions branding cheat sheet](https://haya14busa.github.io/github-action-brandings/)
-
+액션 자체를 정의하는 메타데이터(예를들어 메시지 보낼 데이터 등등)
+inputs를 안에 넣어서 이 4가지 밸류를 받는다 말한다
 ```yaml
 name: Send Webex Message to Room
 author: Justin Yoo
